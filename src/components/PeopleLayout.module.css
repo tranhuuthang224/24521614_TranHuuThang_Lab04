@@ -1,0 +1,109 @@
+.peopleFrame {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) 2fr;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  align-items: start;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.sidebarHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 0.875rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid #1f2937;
+}
+
+.sidebarTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.countBadge {
+  background: #1f2937;
+  color: #9ca3af;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+}
+
+.navList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.navItem {
+  margin: 0;
+  padding: 0;
+}
+
+.navLink {
+  display: flex;
+  flex-direction: column;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  color: #d1d5db;
+  background: rgba(31, 41, 55, 0.4);
+  border: 1px solid transparent;
+  transition: all 0.15s ease-in-out;
+}
+
+.navLink:hover {
+  background: rgba(55, 65, 81, 0.6);
+  color: #ffffff;
+  border-color: #374151;
+}
+
+.navLinkActive {
+  background: rgba(59, 130, 246, 0.15) !important;
+  border-color: rgba(59, 130, 246, 0.5) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 0 1px rgba(59, 130, 246, 0.3);
+}
+
+.navLinkName {
+  font-size: 0.9375rem;
+  font-weight: 600;
+}
+
+.navLinkRole {
+  font-size: 0.8125rem;
+  color: #9ca3af;
+  margin-top: 0.2rem;
+}
+
+.navLinkActive .navLinkRole {
+  color: #93c5fd;
+}
+
+.contentArea {
+  min-height: 280px;
+}
+
+/* Responsive Master-Detail Layout Contract */
+@media (max-width: 768px) {
+  .peopleFrame {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+}

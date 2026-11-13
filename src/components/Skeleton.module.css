@@ -1,0 +1,58 @@
+.skeletonContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 0.75rem;
+  min-height: 280px;
+  box-sizing: border-box;
+}
+
+.skeletonRow {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.skeletonPulse {
+  background: linear-gradient(
+    90deg,
+    rgba(31, 41, 55, 0.6) 25%,
+    rgba(55, 65, 81, 0.8) 50%,
+    rgba(31, 41, 55, 0.6) 75%
+  );
+  background-size: 200% 100%;
+  animation: pulseShimmer 1.5s infinite ease-in-out;
+  border-radius: 0.375rem;
+}
+
+.skeletonLabel {
+  width: 90px;
+  height: 18px;
+}
+
+.skeletonValue {
+  width: 70%;
+  height: 24px;
+}
+
+.skeletonValueShort {
+  width: 40%;
+  height: 24px;
+}
+
+.skeletonValueLong {
+  width: 95%;
+  height: 38px;
+}
+
+@keyframes pulseShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}

@@ -1,0 +1,48 @@
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  margin-bottom: 1.25rem;
+}
+
+.label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 0.5rem;
+  color: #f8fafc;
+  font-size: 0.9375rem;
+  box-sizing: border-box;
+  transition: all 0.15s ease-in-out;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+  background: rgba(239, 68, 68, 0.05);
+}
+
+.inputError:focus {
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.25) !important;
+}
+
+.errorMessage {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: #f87171;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}

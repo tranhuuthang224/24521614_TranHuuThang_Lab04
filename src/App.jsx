@@ -4,6 +4,7 @@ import { PEOPLE } from './data/people';
 import PeopleLayout from './components/PeopleLayout';
 import PeopleIndex from './components/PeopleIndex';
 import Skeleton from './components/Skeleton';
+import SimpleForm from './components/SimpleForm';
 import styles from './App.module.css';
 
 // Slide 9: Code-Splitting via React.lazy() for route-level chunking
@@ -32,6 +33,14 @@ export function App() {
               }
             >
               Directory (Sprint 1)
+            </NavLink>
+            <NavLink
+              to="/form"
+              className={({ isActive }) =>
+                `${styles.topNavLink} ${isActive ? styles.topNavLinkActive : ''}`
+              }
+            >
+              Form Engine (Sprint 2)
             </NavLink>
             <NavLink
               to="/people/invalid-id-test"
@@ -68,6 +77,9 @@ export function App() {
               }
             />
           </Route>
+
+          {/* Sprint 2: Context Form Engine */}
+          <Route path="/form" element={<SimpleForm />} />
 
           {/* Fallback global 404 */}
           <Route

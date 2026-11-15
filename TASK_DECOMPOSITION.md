@@ -44,10 +44,29 @@
 
 ---
 
+- [x] **Block 3 (75–120m) — Sprint 2: Context Form Engine (Exercise 2 / Ex 1.3 - Slides 13–15, 24–25)**
+  - [x] **Task 2.1: Synchronous Form Validation Engine (`src/context/FormContext.jsx`)**
+    - Single render-pass evaluation eliminating cascading 5-layer `useEffect` waterfalls (Slide 13 anti-pattern).
+    - Pure derived error computation and cross-field validation (`confirmPassword` matching `password`).
+    - Encapsulated provider pattern with `useFormContext` custom hook abstraction.
+  - [x] **Task 2.2: Accessible InputField Component (`src/components/InputField.jsx`)**
+    - Deterministic unique ID generation via React 19 `useId()`.
+    - Screen reader binding with `aria-invalid` and `aria-describedby` linked to `${id}-error`.
+    - Semantic accessible error messaging with `role="alert"`.
+  - [x] **Task 2.3: Live State Inspector (`src/components/ShowData.jsx`)**
+    - Semantic definition list `<dl className="json-inspector">`, `<dt>`, `<dd>` replacing unstructured `JSON.stringify`.
+    - Key-value inspection of submitted payload.
+  - [x] **Task 2.4: SimpleForm Architecture (`src/components/SimpleForm.jsx`)**
+    - Multi-field input handling (`fullName`, `studentId`, `email`, `password`, `confirmPassword`).
+    - Live real-time validation status badge without state lag.
+    - Reset and Submit handlers with `<ShowData />` rendering upon valid submission.
+  - [x] **Task 2.5: Router Integration & Verification**
+    - Route `/form` added to `src/App.jsx` with top navigation link.
+    - Automated verification suite `scripts/verify-sprint2.js` passing 22/22 tests.
+
+---
+
 ## Upcoming Sprints
-- [ ] **Block 3 (75–120m) — Sprint 2: Context Form Engine (Exercise 2 / Ex 1.3)**
-  - SimpleForm.jsx, FormContext.js, InputField.jsx, ShowData.jsx.
-  - Synchronous single-render-pass validation engine.
 - [ ] **Block 4 (120–155m) — Sprint 3: Full-Stack Hook & Express REST API (Exercise 3 / Ex 1.7.1)**
   - `useForumMessages.js` custom hook with AbortController signal cleanup.
   - Express server with CORS middleware and strict payload validation.

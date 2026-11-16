@@ -17,6 +17,9 @@ build/
 # Slide decks & large binaries
 *.pptx
 *.pdf
+*.zip
+*.docx
+Ex1/
 
 # Editor & OS files
 .vscode/

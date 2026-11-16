@@ -5,12 +5,16 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "server": "node server.js",
     "build": "vite build",
     "preview": "vite preview",
     "test:verify": "node scripts/verify-sprint1.js",
-    "test:verify:sprint2": "node scripts/verify-sprint2.js"
+    "test:verify:sprint2": "node scripts/verify-sprint2.js",
+    "test:verify:sprint3": "node scripts/verify-sprint3.js"
   },
   "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-router": "^7.1.0"

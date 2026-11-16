@@ -45,3 +45,14 @@ As mandated by **Slide 18 & Slide 28** of the UIT S3T Lab 4 curriculum, this aud
 - Verified dynamic chunk splitting with `React.lazy()` and dimension-matched `<Skeleton />`.
 - Enforced clean URL param extraction via `useParams()` with explicit 404 boundary guard.
 - Tested responsive CSS Grid layout (`grid-template-columns: minmax(280px, 1fr) 2fr`) across desktop and 375px mobile viewports.
+
+## 4. Sprint 2 Verified Engineering Defenses
+- Eliminated cascading 5-layer `useEffect` validation waterfalls in favor of a single-render-pass synchronous validation engine.
+- Bound unique accessible IDs via React 19 `useId()` and linked `aria-invalid` / `aria-describedby` to `${id}-error`.
+- Replaced raw `JSON.stringify` dumps with semantic `<ShowData />` inspector using `<dl>`, `<dt>`, `<dd>`.
+
+## 5. Sprint 3 Verified Engineering Defenses
+- Guarded asynchronous data fetching using native `AbortController` signal cleanup to guarantee zero memory leaks and prevent race condition state corruption during rapid channel switching.
+- Enforced `!controller.signal.aborted` guards across `try/catch/finally` blocks before committing state.
+- Secured Express backend routes with CORS origin validation and strict POST payload verification.
+- Utilized `crypto.randomUUID()` for cryptographically secure entity IDs.

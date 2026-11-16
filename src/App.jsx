@@ -5,6 +5,7 @@ import PeopleLayout from './components/PeopleLayout';
 import PeopleIndex from './components/PeopleIndex';
 import Skeleton from './components/Skeleton';
 import SimpleForm from './components/SimpleForm';
+import ForumChannelViewer from './components/ForumChannelViewer';
 import styles from './App.module.css';
 
 // Slide 9: Code-Splitting via React.lazy() for route-level chunking
@@ -41,6 +42,14 @@ export function App() {
               }
             >
               Form Engine (Sprint 2)
+            </NavLink>
+            <NavLink
+              to="/channels"
+              className={({ isActive }) =>
+                `${styles.topNavLink} ${isActive ? styles.topNavLinkActive : ''}`
+              }
+            >
+              Live Forum (Sprint 3)
             </NavLink>
             <NavLink
               to="/people/invalid-id-test"
@@ -80,6 +89,10 @@ export function App() {
 
           {/* Sprint 2: Context Form Engine */}
           <Route path="/form" element={<SimpleForm />} />
+
+          {/* Sprint 3: Full-Stack Forum Channel Viewer (AbortController) */}
+          <Route path="/channels" element={<ForumChannelViewer />} />
+          <Route path="/forum" element={<Navigate to="/channels" replace />} />
 
           {/* Fallback global 404 */}
           <Route

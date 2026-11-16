@@ -66,10 +66,30 @@
 
 ---
 
-## Upcoming Sprints
-- [ ] **Block 4 (120–155m) — Sprint 3: Full-Stack Hook & Express REST API (Exercise 3 / Ex 1.7.1)**
-  - `useForumMessages.js` custom hook with AbortController signal cleanup.
-  - Express server with CORS middleware and strict payload validation.
+- [x] **Block 4 (120–155m) — Sprint 3: Full-Stack Hook & Express REST API (Exercise 3 / Ex 1.7.1 - Slides 16–17, 26–27)**
+  - [x] **Task 3.1: Express REST API Server Architecture (`server.js`)**
+    - Configured CORS middleware: `cors({ origin: 'http://localhost:5173' })`.
+    - Endpoints `GET /api/messages/:forum` and `POST /api/messages/:forum`.
+    - Strict POST payload validation (`!req.body.text || !req.body.author` -> 400 status).
+    - Unique message ID generation using `crypto.randomUUID()`.
+    - Seeded mock persistence channels: `'nasa'`, `'esports-tribunal'`, `'notNasa'`.
+  - [x] **Task 3.2: Custom Hook with AbortController (`src/hooks/useForumMessages.js`)**
+    - Instant cancellation of in-flight requests on rapid channel switching via `AbortController`.
+    - Safe state mutation with `!controller.signal.aborted` guards across `try/catch/finally`.
+    - Cleanup function returning `() => controller.abort()`.
+    - Integrated `postMessage` dispatcher updating state seamlessly.
+  - [x] **Task 3.3: Semantic UI Channel Viewer (`src/components/ForumChannelViewer.jsx`)**
+    - Multi-channel selector for `'nasa'`, `'esports-tribunal'`, `'notNasa'`.
+    - Semantic definition list `<dl>` rendering keyed `<React.Fragment key={msg.id}>` (Slide 16).
+    - Live AbortController cancellation telemetry counter and loading indicators.
+  - [x] **Task 3.4: Proxy & Router Integration**
+    - Vite proxy configured to forward `/api` requests to `http://localhost:5000`.
+    - Route `/channels` and alias `/forum` integrated into React Router v7 routes.
+    - Automated verification suite `scripts/verify-sprint3.js` passing 20/20 tests.
+
+---
+
+## Upcoming Evaluation & Homeworks
 - [ ] **Block 5 (155–180m): Live Refactoring Defense & Homework Hand-off**
   - Live Defense Challenges (useSearchParams sync, Cross-Field Validation, Auto-Retry Backoff, Protected Route Guard).
   - Homeworks: Gallery SPA, Card-Swipe 'Hẹn Hò Không Yêu', Fair-Play Appeal Tribunal.

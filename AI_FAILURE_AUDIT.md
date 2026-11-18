@@ -56,3 +56,17 @@ As mandated by **Slide 18 & Slide 28** of the UIT S3T Lab 4 curriculum, this aud
 - Enforced `!controller.signal.aborted` guards across `try/catch/finally` blocks before committing state.
 - Secured Express backend routes with CORS origin validation and strict POST payload verification.
 - Utilized `crypto.randomUUID()` for cryptographically secure entity IDs.
+
+## 6. Homework 1 Verified Engineering Defenses (Photo Gallery SPA)
+- Adopted native HTML5 `<dialog>` element with standard `showModal()` and `close()` API instead of fragile custom `<div>` modal wrappers.
+- Integrated automated focus trapping and keyboard `Escape` dismissal without leaking event listeners.
+- Bound modal visibility and category filtering directly to browser query strings via `useSearchParams()`.
+
+## 7. Homework 2 Verified Engineering Defenses (Card-Swipe Deck)
+- Implemented an immutable LIFO Undo Stack (`slice(0, -1)`) preventing accidental in-place mutations.
+- Computed game metrics and asymmetric scores purely during render using `Array.prototype.reduce()`, completely bypassing unnecessary `useEffect` recalculation loops.
+- Applied clean Mongoose 8 async/await patterns without deprecated connection options (`useNewUrlParser`, `useUnifiedTopology`).
+
+## 8. Homework 3 Verified Engineering Defenses (Esports Appeal Tribunal)
+- Mitigated browser background tab throttling using the Page Visibility API (`visibilitychange`), recalculating remaining time against absolute system clock deltas (`Date.now()`) to achieve zero SLA timer drift.
+- Rendered disproportionality severity metrics synchronously in a single render pass via `useMemo()`.

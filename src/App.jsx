@@ -6,6 +6,10 @@ import PeopleIndex from './components/PeopleIndex';
 import Skeleton from './components/Skeleton';
 import SimpleForm from './components/SimpleForm';
 import ForumChannelViewer from './components/ForumChannelViewer';
+import PhotoGalleryLayout from './components/PhotoGalleryLayout';
+import SwipeDeck from './components/SwipeDeck';
+import FairPlayAppealPortal from './components/FairPlayAppealPortal';
+import DossierView from './components/DossierView';
 import styles from './App.module.css';
 
 // Slide 9: Code-Splitting via React.lazy() for route-level chunking
@@ -17,7 +21,7 @@ export function App() {
       <header className={styles.topHeader}>
         <div className={styles.headerContent}>
           <div className={styles.branding}>
-            <span className={styles.institutionBadge}>UIT • S3T LAB 04</span>
+            <span className={styles.institutionBadge}>UIT • S3T LAB 04 FULL-STACK</span>
             <h1 className={styles.appTitle}>
               Multi-Route SPA Architecture &amp; React Router v7
             </h1>
@@ -49,7 +53,31 @@ export function App() {
                 `${styles.topNavLink} ${isActive ? styles.topNavLinkActive : ''}`
               }
             >
-              Live Forum (Sprint 3)
+              Forum API (Sprint 3)
+            </NavLink>
+            <NavLink
+              to="/gallery"
+              className={({ isActive }) =>
+                `${styles.topNavLink} ${styles.hwLink} ${isActive ? styles.topNavLinkActive : ''}`
+              }
+            >
+              Gallery (HW1)
+            </NavLink>
+            <NavLink
+              to="/swipe"
+              className={({ isActive }) =>
+                `${styles.topNavLink} ${styles.hwLink} ${isActive ? styles.topNavLinkActive : ''}`
+              }
+            >
+              Card Swipe (HW2)
+            </NavLink>
+            <NavLink
+              to="/dossier/himass"
+              className={({ isActive }) =>
+                `${styles.topNavLink} ${styles.hwLink} ${isActive ? styles.topNavLinkActive : ''}`
+              }
+            >
+              Tribunal (HW3)
             </NavLink>
             <NavLink
               to="/people/invalid-id-test"
@@ -60,7 +88,7 @@ export function App() {
               }
               title="Test 404 Error Boundary Guard"
             >
-              Test 404 Guard
+              Test 404
             </NavLink>
           </nav>
         </div>
@@ -71,7 +99,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/people" replace />} />
 
-          {/* Nested Route Layout via PeopleLayout & <Outlet /> */}
+          {/* Sprint 1: Nested Route Layout via PeopleLayout & <Outlet /> */}
           <Route path="/people" element={<PeopleLayout people={PEOPLE} />}>
             <Route index element={<PeopleIndex />} />
             <Route
@@ -94,6 +122,21 @@ export function App() {
           <Route path="/channels" element={<ForumChannelViewer />} />
           <Route path="/forum" element={<Navigate to="/channels" replace />} />
 
+          {/* Homework 1: Production Multi-Route Photo & Evidence Gallery SPA */}
+          <Route path="/gallery" element={<PhotoGalleryLayout />} />
+
+          {/* Homework 2: Full-Stack Interactive Card-Swipe Deck ('Hen Ho Nhung Khong Yeu' Edition) */}
+          <Route path="/swipe" element={<SwipeDeck />} />
+
+          {/* Homework 3: Full-Stack Esports Fair-Play Appeal Tribunal (Himass & TanVuu) */}
+          <Route path="/dossier" element={<FairPlayAppealPortal />}>
+            <Route index element={<Navigate to="/dossier/himass" replace />} />
+            {/* Slide 32 Code Contract: Multi-Route Dossier routing for team members Himass & TanVuu */}
+            <Route path="himass" element={<DossierView user="Himass" />} />
+            <Route path="tanvuu" element={<DossierView user="TanVuu" />} />
+            <Route path=":playerId" element={<DossierView />} />
+          </Route>
+
           {/* Fallback global 404 */}
           <Route
             path="*"
@@ -115,7 +158,7 @@ export function App() {
           University of Information Technology (UIT - VNUHCM) • Smart Software System Team (S3T)
         </p>
         <p className={styles.footerInvariant}>
-          Invariant Verification: Zero Div-Soup • React Router v7 &lt;Outlet /&gt; • CLS = 0 Skeleton • WCAG 2.2 AA
+          Full-Stack React 19 Contracts: Router v7 &lt;Outlet /&gt; • Context Form Engine • AbortController • HTML5 &lt;dialog&gt; • LIFO Undo • Zero-Drift SLA
         </p>
       </footer>
     </div>

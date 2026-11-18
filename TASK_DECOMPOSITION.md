@@ -89,7 +89,34 @@
 
 ---
 
-## Upcoming Evaluation & Homeworks
-- [ ] **Block 5 (155–180m): Live Refactoring Defense & Homework Hand-off**
-  - Live Defense Challenges (useSearchParams sync, Cross-Field Validation, Auto-Retry Backoff, Protected Route Guard).
-  - Homeworks: Gallery SPA, Card-Swipe 'Hẹn Hò Không Yêu', Fair-Play Appeal Tribunal.
+## Block 5 (155–180m): Live Refactoring Defense & Homework Verification
+- [x] **Task 5.1: Live Defense Challenge Readiness (Slide 27)**
+  - Challenge 1: URL Search Params Sync with `useSearchParams()` (Verified in HW1 Photo Gallery).
+  - Challenge 2: Cross-Field Validation (Verified in Sprint 2 Confirm Password & HW3 Appeal Form).
+  - Challenge 3: Auto-Retry Backoff & AbortController (Verified in Sprint 3 Forum API).
+  - Challenge 4: Protected Route Guard (Verified via React Router v7 layout wrappers & 404 error boundaries).
+- [x] **Task 5.2: Post-Mortem Audit & AI Hallucination Registry (`AI_FAILURE_AUDIT.md`)**
+  - Completed evaluation documentation satisfying 15% course verification grade.
+
+---
+
+## Production Homework Modules
+- [x] **Homework 1: Production Multi-Route Photo & Evidence Gallery SPA (Slide 19 & Slide 29/30)**
+  - Deep linking synchronized via `useSearchParams()` for category filters and modal photo views (`photoId`).
+  - Native HTML5 `<dialog>` modal lightbox with automated focus trap management (`showModal()` & `close()`).
+  - Strict WCAG 2.2 AA accessibility and 100/100 Lighthouse performance compliance.
+  - Automated verification suite `scripts/verify-hw1.js` passing 10/10 tests.
+
+- [x] **Homework 2: Full-Stack Interactive Card-Swipe Deck 'Hen Ho Nhung Khong Yeu' (Slide 20 & Slide 30/31)**
+  - Dual Keyboard (`ArrowLeft`, `ArrowRight`, `ArrowUp`, `Backspace`) and Pointer drag gesture tracking.
+  - LIFO Undo Stack with `slice(0, -1)` for sequential card restoration.
+  - Pure derived asymmetric score calculation (`reduce` during render, zero useEffect).
+  - Modern Express & Mongoose 8 persistence layer (`/api/profiles`, `/api/swipe`).
+  - Automated verification suite `scripts/verify-hw2.js` passing 10/10 tests.
+
+- [x] **Homework 3: Full-Stack Esports Fair-Play Appeal Tribunal (Slide 21 & Slide 32/33)**
+  - Multi-Route Case Dossier navigation for `/dossier/himass` and `/dossier/tanvuu`.
+  - Disproportionality Derived Severity Matrix calculation via `useMemo(() => computeMatrix(dossierData))`.
+  - High-precision Zero-Drift SLA Countdown Hook `useAppealSlaTimer.js` synchronized via Page Visibility API (`visibilitychange`).
+  - Context-driven appeal rebuttal form with synchronous single-pass validation.
+  - Automated verification suite `scripts/verify-hw3.js` passing 16/16 tests.

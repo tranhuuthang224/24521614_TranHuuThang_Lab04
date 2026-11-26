@@ -7,6 +7,7 @@ import Skeleton from './components/Skeleton';
 import SimpleForm from './components/SimpleForm';
 import ForumChannelViewer from './components/ForumChannelViewer';
 import PhotoGalleryLayout from './components/PhotoGalleryLayout';
+import SwipeDeck from './components/SwipeDeck';
 import styles from './App.module.css';
 
 // Slide 9: Code-Splitting via React.lazy() for route-level chunking
@@ -61,6 +62,14 @@ export function App() {
               Gallery (HW1)
             </NavLink>
             <NavLink
+              to="/swipe"
+              className={({ isActive }) =>
+                `${styles.topNavLink} ${styles.hwLink} ${isActive ? styles.topNavLinkActive : ''}`
+              }
+            >
+              Card Swipe (HW2)
+            </NavLink>
+            <NavLink
               to="/people/invalid-id-test"
               className={({ isActive }) =>
                 `${styles.topNavLink} ${styles.testLink} ${
@@ -106,6 +115,9 @@ export function App() {
           {/* Homework 1: Production Multi-Route Photo & Evidence Gallery SPA */}
           <Route path="/gallery" element={<PhotoGalleryLayout />} />
 
+          {/* Homework 2: Full-Stack Interactive Card-Swipe Deck ('Hen Ho Nhung Khong Yeu' Edition) */}
+          <Route path="/swipe" element={<SwipeDeck />} />
+
           {/* Fallback global 404 */}
           <Route
             path="*"
@@ -127,7 +139,7 @@ export function App() {
           University of Information Technology (UIT - VNUHCM) • Smart Software System Team (S3T)
         </p>
         <p className={styles.footerInvariant}>
-          Invariant Verification: React Router v7 &lt;Outlet /&gt; • useSearchParams() • Native HTML5 &lt;dialog&gt; • WCAG 2.2 AA
+          Invariant Verification: React Router v7 &lt;Outlet /&gt; • HTML5 &lt;dialog&gt; • LIFO Undo Stack • Mongoose Async/Await
         </p>
       </footer>
     </div>

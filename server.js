@@ -1,15 +1,92 @@
 import express from 'express';
 import cors from 'cors';
 import crypto from 'node:crypto';
+import fs from 'node:fs';
+import mongoose from 'mongoose';
+import { PROFILES } from './src/data/profiles.js';
+
+// Load local .env automatically when present (without hardcoding secrets)
+if (fs.existsSync('.env') && typeof process.loadEnvFile === 'function') {
+  process.loadEnvFile('.env');
+}
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// Slide 26 Code Contract: CORS middleware & JSON parsing
+// Slide 26 Code Contract: CORS middleware & JSON body parsing
 app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
-// In-Memory Database Store for Lab 4 Channels
+// ============================================================================
+// Slide 31 / 32 Code Contract: Modern Express + Mongoose Server
+// ============================================================================
+// 1. Environment Variable Security Guard (Zero hardcoded DB URIs/secrets)
+const MONGODB_URI = process.env.MONGODB_URI;
+
+let isMongoConnected = false;
+
+// 2. Modern Connection Syntax (Zero Deprecated Flags in Mongoose 8+)
+async function connectDatabase() {
+  if (!MONGODB_URI) {
+    isMongoConnected = false;
+    console.warn('[Mongoose] MONGODB_URI not provided in environment; in-memory persistence active.');
+    return;
+  }
+
+  try {
+    await mongoose.connect(MONGODB_URI);
+    isMongoConnected = true;
+    console.log('[Mongoose] Connected successfully via process.env.MONGODB_URI');
+
+    // Seed Profile collection on first startup if empty
+    const existingCount = await Profile.countDocuments();
+    if (existingCount === 0) {
+      await Profile.insertMany(PROFILES);
+      console.log(`[Mongoose] Seeded ${PROFILES.length} profiles into MongoDB.`);
+    }
+  } catch (err) {
+    isMongoConnected = false;
+    console.warn('[Mongoose] MongoDB unreachable; fallback in-memory persistence active:', err.message);
+  }
+}
+connectDatabase();
+
+// Mongoose Schemas & Models
+const ProfileSchema = new mongoose.Schema(
+  {
+    id: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
+    age: { type: Number, required: true },
+    tagline: String,
+    bio: String,
+    image: String,
+    asymmetricFactor: String,
+    redFlags: [String],
+    interests: [String],
+  },
+  { timestamps: true }
+);
+
+const SwipeSchema = new mongoose.Schema(
+  {
+    profileId: { type: String, required: true },
+    profileName: { type: String, required: true },
+    type: { type: String, enum: ['LIKE', 'PASS', 'SUPERLIKE'], required: true },
+    scoreDelta: { type: Number, required: true },
+    timestamp: { type: Date, default: Date.now },
+  },
+  { timestamps: true }
+);
+
+const Profile = mongoose.models.Profile || mongoose.model('Profile', ProfileSchema);
+const Swipe = mongoose.models.Swipe || mongoose.model('Swipe', SwipeSchema);
+
+// In-Memory Fallback Store
+const memorySwipes = [];
+
+// ============================================================================
+// Sprint 3: Forum Channels In-Memory Store
+// ============================================================================
 const forumDb = {
   nasa: [
     {
@@ -55,25 +132,18 @@ const forumDb = {
   ],
 };
 
-// Database helper functions
 const db = {
   async getMessagesByForum(forum) {
-    if (!forumDb[forum]) {
-      forumDb[forum] = [];
-    }
-    return forumDb[forum];
+    return forumDb[forum] || [];
   },
   async addMessage(forum, message) {
-    if (!forumDb[forum]) {
-      forumDb[forum] = [];
-    }
+    if (!forumDb[forum]) forumDb[forum] = [];
     forumDb[forum].push(message);
     return message;
   },
 };
 
 // GET /api/messages/:forum
-// Supports optional delay query param (?delay=ms) to test simulated Slow 3G and AbortController cancellation
 app.get('/api/messages/:forum', async (req, res) => {
   const forum = req.params.forum;
   const delay = parseInt(req.query.delay || '0', 10);
@@ -86,7 +156,7 @@ app.get('/api/messages/:forum', async (req, res) => {
   res.json(messages);
 });
 
-// Slide 26 Code Contract: POST Payload Validation & ID Generation
+// POST /api/messages/:forum
 app.post('/api/messages/:forum', async (req, res) => {
   if (!req.body.text || !req.body.author) {
     return res.status(400).json({ error: 'Missing required fields' });
@@ -103,16 +173,95 @@ app.post('/api/messages/:forum', async (req, res) => {
   res.status(201).json(newMessage);
 });
 
-// Health check endpoint
-app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', service: 'Lab04 Express REST API', timestamp: new Date() });
+// ============================================================================
+// Homework 2 Endpoints: Slide 31 Code Contract
+// ============================================================================
+
+// 3. Async/Await GET Endpoint (Optimized read via .lean())
+app.get('/api/profiles', async (req, res) => {
+  try {
+    if (isMongoConnected) {
+      const profiles = await Profile.find().lean();
+      if (profiles && profiles.length > 0) {
+        return res.json(profiles);
+      }
+    }
+    // Fallback to rich PROFILES dataset
+    res.json(PROFILES);
+  } catch (err) {
+    res.json(PROFILES);
+  }
 });
 
-// Start listening if run directly
+// 4. Async/Await POST Endpoint with Try/Catch Block
+app.post('/api/swipe', async (req, res) => {
+  try {
+    if (!req.body.profileId || !req.body.type) {
+      return res.status(400).json({ error: 'Missing profileId or type' });
+    }
+
+    const swipeData = {
+      profileId: req.body.profileId,
+      profileName: req.body.profileName || 'Unknown Profile',
+      type: req.body.type,
+      scoreDelta: Number(req.body.scoreDelta) || 0,
+      timestamp: req.body.timestamp ? new Date(req.body.timestamp) : new Date(),
+    };
+
+    if (isMongoConnected) {
+      const record = await Swipe.create(swipeData);
+      return res.status(201).json(record);
+    } else {
+      memorySwipes.push({ id: crypto.randomUUID(), ...swipeData });
+      return res.status(201).json(swipeData);
+    }
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.get('/api/swipes', async (req, res) => {
+  if (isMongoConnected) {
+    const list = await Swipe.find().sort({ timestamp: -1 }).lean();
+    return res.json(list);
+  }
+  res.json([...memorySwipes].reverse());
+});
+
+// Delete latest swipe for LIFO Undo persistence parity
+app.delete('/api/swipe/:profileId', async (req, res) => {
+  try {
+    const { profileId } = req.params;
+    if (isMongoConnected) {
+      const removed = await Swipe.findOneAndDelete(
+        { profileId },
+        { sort: { createdAt: -1 } }
+      ).lean();
+      return res.json({ deleted: !!removed, record: removed });
+    }
+    const idx = memorySwipes.findLastIndex((s) => s.profileId === profileId);
+    const removed = idx >= 0 ? memorySwipes.splice(idx, 1)[0] : null;
+    res.json({ deleted: !!removed, record: removed });
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({
+    status: 'ok',
+    service: 'Lab04 Full-Stack Server',
+    mongoConnected: isMongoConnected,
+    timestamp: new Date(),
+  });
+});
+
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {
     console.log(`[Express API] Lab 04 Server listening on http://localhost:${PORT}`);
     console.log(`[Express API] Channels available: nasa, esports-tribunal, notNasa`);
+    console.log(`[Express API] Homework 2 endpoints: GET /api/profiles, POST /api/swipe`);
   });
 }
 

@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "test:verify": "node scripts/verify-sprint1.js",
     "test:verify:sprint2": "node scripts/verify-sprint2.js",
-    "test:verify:sprint3": "node scripts/verify-sprint3.js"
+    "test:verify:sprint3": "node scripts/verify-sprint3.js",
+    "test:verify:hw1": "node scripts/verify-hw1.js"
   },
   "dependencies": {
     "cors": "^2.8.6",

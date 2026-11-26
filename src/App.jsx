@@ -6,6 +6,7 @@ import PeopleIndex from './components/PeopleIndex';
 import Skeleton from './components/Skeleton';
 import SimpleForm from './components/SimpleForm';
 import ForumChannelViewer from './components/ForumChannelViewer';
+import PhotoGalleryLayout from './components/PhotoGalleryLayout';
 import styles from './App.module.css';
 
 // Slide 9: Code-Splitting via React.lazy() for route-level chunking
@@ -52,6 +53,14 @@ export function App() {
               Live Forum (Sprint 3)
             </NavLink>
             <NavLink
+              to="/gallery"
+              className={({ isActive }) =>
+                `${styles.topNavLink} ${styles.hwLink} ${isActive ? styles.topNavLinkActive : ''}`
+              }
+            >
+              Gallery (HW1)
+            </NavLink>
+            <NavLink
               to="/people/invalid-id-test"
               className={({ isActive }) =>
                 `${styles.topNavLink} ${styles.testLink} ${
@@ -94,6 +103,9 @@ export function App() {
           <Route path="/channels" element={<ForumChannelViewer />} />
           <Route path="/forum" element={<Navigate to="/channels" replace />} />
 
+          {/* Homework 1: Production Multi-Route Photo & Evidence Gallery SPA */}
+          <Route path="/gallery" element={<PhotoGalleryLayout />} />
+
           {/* Fallback global 404 */}
           <Route
             path="*"
@@ -115,7 +127,7 @@ export function App() {
           University of Information Technology (UIT - VNUHCM) • Smart Software System Team (S3T)
         </p>
         <p className={styles.footerInvariant}>
-          Invariant Verification: Zero Div-Soup • React Router v7 &lt;Outlet /&gt; • CLS = 0 Skeleton • WCAG 2.2 AA
+          Invariant Verification: React Router v7 &lt;Outlet /&gt; • useSearchParams() • Native HTML5 &lt;dialog&gt; • WCAG 2.2 AA
         </p>
       </footer>
     </div>

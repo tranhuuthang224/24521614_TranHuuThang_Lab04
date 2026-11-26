@@ -65,4 +65,31 @@ export function validateForm(values) {
   return errors;
 }
 
+/**
+ * Pure synchronous validation for Homework 3 Esports Appeal Form (Slide 21 & 32).
+ * Evaluates all fields in a single render pass without useEffect waterfalls.
+ */
+export function validateAppealForm(values) {
+  const errors = {};
+
+  if (!values.representative || !values.representative.trim()) {
+    errors.representative = 'Legal representative name is required';
+  } else if (values.representative.trim().length < 3) {
+    errors.representative = 'Representative name must be at least 3 characters';
+  }
+
+  if (!values.email || !values.email.trim()) {
+    errors.email = 'Valid corporate or player email is required';
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email.trim())) {
+    errors.email = 'Valid corporate or player email is required';
+  }
+
+  if (!values.statement || values.statement.trim().length < 20) {
+    errors.statement =
+      'Rebuttal must be at least 20 characters explaining technical mitigating factors';
+  }
+
+  return errors;
+}
+
 export default FormContext;

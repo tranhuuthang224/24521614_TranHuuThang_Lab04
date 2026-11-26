@@ -78,11 +78,26 @@ const SwipeSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+const AppealSchema = new mongoose.Schema(
+  {
+    id: { type: String, default: () => crypto.randomUUID() },
+    caseNumber: { type: String, required: true },
+    playerName: { type: String, required: true },
+    representative: { type: String, required: true },
+    email: { type: String, required: true },
+    statement: { type: String, required: true },
+    submittedAt: { type: Date, default: Date.now },
+  },
+  { timestamps: true }
+);
+
 const Profile = mongoose.models.Profile || mongoose.model('Profile', ProfileSchema);
 const Swipe = mongoose.models.Swipe || mongoose.model('Swipe', SwipeSchema);
+const Appeal = mongoose.models.Appeal || mongoose.model('Appeal', AppealSchema);
 
-// In-Memory Fallback Store
+// In-Memory Fallback Stores
 const memorySwipes = [];
+const memoryAppeals = [];
 
 // ============================================================================
 // Sprint 3: Forum Channels In-Memory Store
@@ -247,6 +262,45 @@ app.delete('/api/swipe/:profileId', async (req, res) => {
   }
 });
 
+// ============================================================================
+// Homework 3 Endpoints: Esports Appeals
+// ============================================================================
+app.post('/api/appeals', async (req, res) => {
+  try {
+    if (!req.body.caseNumber || !req.body.representative) {
+      return res.status(400).json({ error: 'Missing required appeal fields' });
+    }
+
+    const record = {
+      id: crypto.randomUUID(),
+      caseNumber: req.body.caseNumber,
+      playerName: req.body.playerName,
+      representative: req.body.representative,
+      email: req.body.email,
+      statement: req.body.statement,
+      submittedAt: new Date().toISOString(),
+    };
+
+    if (isMongoConnected) {
+      await Appeal.create(record);
+    } else {
+      memoryAppeals.push(record);
+    }
+
+    res.status(201).json(record);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
+});
+
+app.get('/api/appeals', async (req, res) => {
+  if (isMongoConnected) {
+    const list = await Appeal.find().sort({ submittedAt: -1 }).lean();
+    return res.json(list);
+  }
+  res.json([...memoryAppeals].reverse());
+});
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({
@@ -262,6 +316,7 @@ if (process.env.NODE_ENV !== 'test') {
     console.log(`[Express API] Lab 04 Server listening on http://localhost:${PORT}`);
     console.log(`[Express API] Channels available: nasa, esports-tribunal, notNasa`);
     console.log(`[Express API] Homework 2 endpoints: GET /api/profiles, POST /api/swipe`);
+    console.log(`[Express API] Homework 3 endpoints: POST /api/appeals, GET /api/appeals`);
   });
 }
 

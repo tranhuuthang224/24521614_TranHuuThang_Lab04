@@ -1,0 +1,425 @@
+.dossierContainer {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 0.875rem;
+  padding: 2rem;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+}
+
+.header {
+  border-bottom: 1px solid #1f2937;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.badgeRow {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.tribunalBadge {
+  background: rgba(220, 38, 38, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+}
+
+.caseBadge {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.slaBadge {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 9999px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}
+
+.title {
+  margin: 0;
+  font-size: 1.625rem;
+  font-weight: 800;
+  color: #f9fafb;
+}
+
+.metaLine {
+  margin: 0.35rem 0 0 0;
+  font-size: 0.875rem;
+  color: #9ca3af;
+}
+
+.timerBanner {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 0.625rem;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.timerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.timerLabel {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.timerValue {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #f59e0b;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  line-height: 1.2;
+}
+
+.timerSubtext {
+  margin: 0;
+  font-size: 0.8125rem;
+  color: #64748b;
+  max-width: 320px;
+}
+
+.sectionBlock {
+  margin-bottom: 1.75rem;
+}
+
+.sectionHeading {
+  margin: 0 0 0.875rem 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #f3f4f6;
+  border-left: 3px solid #3b82f6;
+  padding-left: 0.625rem;
+}
+
+.definitionList {
+  margin: 0;
+  padding: 0;
+  background: #0b0f19;
+  border: 1px solid #1f2937;
+  border-radius: 0.5rem;
+}
+
+.dlRow {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  padding: 0.875rem 1.25rem;
+  border-bottom: 1px solid rgba(31, 41, 55, 0.6);
+}
+
+.dlRow:last-child {
+  border-bottom: none;
+}
+
+.dt {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: #9ca3af;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.dd {
+  margin: 0;
+  font-size: 0.9375rem;
+  color: #f1f5f9;
+  line-height: 1.5;
+}
+
+.penaltyText {
+  color: #f87171;
+  font-weight: 700;
+}
+
+.matrixBlock {
+  background: #090d16;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.matrixHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.matrixTitle {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #f9fafb;
+}
+
+.matrixStatus {
+  background: rgba(239, 68, 68, 0.2);
+  color: #fca5a5;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 9999px;
+  font-family: ui-monospace, monospace;
+}
+
+.metricGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.metricCard {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  text-align: center;
+}
+
+.metricLabel {
+  display: block;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 0.35rem;
+}
+
+.metricNum {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #f3f4f6;
+  font-family: ui-monospace, monospace;
+}
+
+.ratioNum {
+  color: #ef4444;
+}
+
+.matrixRecommendation {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  background: rgba(239, 68, 68, 0.08);
+  padding: 0.75rem 1rem;
+  border-radius: 0.375rem;
+  border-left: 3px solid #ef4444;
+}
+
+.evidenceList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.evidenceItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #0b0f19;
+  border: 1px solid #1f2937;
+  border-radius: 0.5rem;
+}
+
+.evidenceType {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  white-space: nowrap;
+}
+
+.evidenceName {
+  font-size: 0.875rem;
+  color: #e2e8f0;
+}
+
+.appealFormSection {
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+}
+
+.formHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.formStatusPill {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  font-family: ui-monospace, monospace;
+}
+
+.formStatusValid {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.35);
+}
+
+.formStatusInvalid {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.offlineNotice {
+  font-size: 0.8125rem;
+  color: #fbbf24;
+  margin: 0.35rem 0;
+}
+
+.appealForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.fieldGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: #cbd5e1;
+}
+
+.input,
+.textarea {
+  padding: 0.75rem 1rem;
+  background: #020617;
+  border: 1px solid #334155;
+  border-radius: 0.375rem;
+  color: #f8fafc;
+  font-size: 0.875rem;
+  outline: none;
+  transition: all 0.15s ease;
+  box-sizing: border-box;
+}
+
+.input:focus,
+.textarea:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+.inputError {
+  border-color: #ef4444 !important;
+}
+
+.errorText {
+  font-size: 0.75rem;
+  color: #f87171;
+}
+
+.submitAppealBtn {
+  padding: 0.875rem 1.5rem;
+  background: #2563eb;
+  color: #ffffff;
+  border: 1px solid #3b82f6;
+  border-radius: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  margin-top: 0.5rem;
+}
+
+.submitAppealBtn:hover {
+  background: #1d4ed8;
+}
+
+.appealSuccessAlert {
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 0.5rem;
+  padding: 1.25rem;
+  color: #34d399;
+}
+
+.appealSuccessAlert h4 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.125rem;
+}
+
+.receiptBox {
+  background: #020617;
+  border: 1px solid #1e293b;
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+  color: #cbd5e1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.notFound {
+  background: #111827;
+  border: 1px solid #1f2937;
+  border-radius: 0.75rem;
+  padding: 2.5rem;
+  text-align: center;
+}
+
+.returnLink {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.625rem 1.25rem;
+  background: #2563eb;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 0.375rem;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .dlRow {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}

@@ -10,6 +10,7 @@ import styles from './InputField.module.css';
 export const InputField = ({
   label,
   name,
+  as = 'input',
   error: explicitError,
   value: explicitValue,
   onChange: explicitOnChange,
@@ -44,12 +45,14 @@ export const InputField = ({
   const onChange = explicitOnChange || contextChange;
   const onBlur = explicitOnBlur || contextBlur;
 
+  const FieldElement = as === 'textarea' ? 'textarea' : 'input';
+
   return (
     <div className={`field-group ${styles.fieldGroup}`}>
       <label htmlFor={id} className={styles.label}>
         {label}
       </label>
-      <input
+      <FieldElement
         id={id}
         name={name}
         value={value}
@@ -57,7 +60,9 @@ export const InputField = ({
         onBlur={onBlur}
         aria-invalid={!!error}
         aria-describedby={error ? errorId : undefined}
-        className={`${styles.input} ${error ? styles.inputError : ''}`}
+        className={`${styles.input} ${as === 'textarea' ? styles.textarea : ''} ${
+          error ? styles.inputError : ''
+        }`}
         {...props}
       />
       {error && (
